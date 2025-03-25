@@ -22,392 +22,311 @@
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-white mb-8">Dia da Sorte</h1>
         
-        <!-- Tela de login (inicialmente visível) -->
-        <div id="login-screen" class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Login de Usuário</h2>
+        <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Gerador de Palpites</h2>
             
-            <div id="login-error" class="text-red-500 text-sm mb-3 hidden">
-                Nome de usuário ou senha incorretos. Tente novamente.
-            </div>
-            
-            <form id="login-form" class="space-y-4">
-                <div>
-                    <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome de Usuário</label>
-                    <input type="text" id="username" class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" required>
-                </div>
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Senha</label>
-                    <input type="password" id="password" class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" required>
-                </div>
-                <div class="flex flex-col gap-2">
-                    <button type="submit" class="w-full py-2 px-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-md transition-colors duration-200">
-                        Entrar
-                    </button>
-                    <button type="button" id="register-btn" class="w-full py-2 px-4 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-medium rounded-md transition-colors duration-200">
-                        Criar Conta
-                    </button>
-                </div>
-            </form>
-        </div>
-        
-        <!-- Tela de registro (inicialmente oculta) -->
-        <div id="register-screen" class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6 hidden">
-            <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Criar Nova Conta</h2>
-            
-            <div id="register-error" class="text-red-500 text-sm mb-3 hidden">
-                Este nome de usuário já está em uso. Escolha outro.
-            </div>
-            
-            <form id="register-form" class="space-y-4">
-                <div>
-                    <label for="new-username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome de Usuário</label>
-                    <input type="text" id="new-username" class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" required>
-                </div>
-                <div>
-                    <label for="new-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Senha</label>
-                    <input type="password" id="new-password" class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" required>
-                </div>
-                <div>
-                    <label for="confirm-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Confirmar Senha</label>
-                    <input type="password" id="confirm-password" class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" required>
-                </div>
-                <div class="flex flex-col gap-2">
-                    <button type="submit" class="w-full py-2 px-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-md transition-colors duration-200">
-                        Criar Conta
-                    </button>
-                    <button type="button" id="back-to-login-btn" class="w-full py-2 px-4 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-medium rounded-md transition-colors duration-200">
-                        Voltar para Login
-                    </button>
-                </div>
-            </form>
-        </div>
-        
-        <!-- Barra de usuário logado -->
-        <div id="user-bar" class="max-w-md mx-auto bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm p-3 mb-4 hidden">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <div class="bg-primary/20 dark:bg-primary/30 rounded-full w-8 h-8 flex items-center justify-center mr-2">
-                        <span id="user-initial" class="text-primary font-bold">U</span>
+            <div class="mb-2">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="flex-1">
+                        <label class="text-sm text-gray-600 dark:text-gray-400 mb-1 block">Números</label>
+                        <div id="numbers-container" class="grid grid-cols-7 gap-2 w-full">
+                            <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
+                            <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
+                            <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
+                            <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
+                            <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
+                            <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
+                            <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
+                        </div>
                     </div>
+                    <div class="w-20">
+                        <label class="text-sm text-gray-600 dark:text-gray-400 mb-1 block">Mês</label>
+                        <div id="month-box" class="month-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
+                    </div>
+                </div>
+                <div id="match-info" class="mt-2 text-sm text-gray-600 dark:text-gray-400 text-center hidden">
+                    Acertos: <span id="match-counter" class="text-green-600 dark:text-green-400">0</span>/7 + Mês: <span id="month-match" class="text-green-600 dark:text-green-400">não</span>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-md font-medium text-gray-700 dark:text-gray-300 mb-3">Digite seus palpites:</h3>
+                
+                <!-- Navegação pelos conjuntos de palpites -->
+                <div class="flex justify-between items-center mb-4">
                     <div>
-                        <span class="text-sm text-gray-700 dark:text-gray-300">Conectado como</span>
-                        <span id="user-display-name" class="font-medium text-gray-800 dark:text-white ml-1">Usuário</span>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Mostrando palpites </span>
+                        <span id="conjunto-atual" class="font-bold">1-5</span>
+                        <span class="text-sm text-gray-600 dark:text-gray-400"> de 31</span>
                     </div>
-                </div>
-                <button id="logout-btn" class="text-xs px-2 py-1 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded">
-                    Sair
-                </button>
-            </div>
-        </div>
-        
-        <!-- App principal (inicialmente oculto) -->
-        <div id="app-container" class="hidden">
-            <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-                <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Gerador de Palpites</h2>
-                
-                <div class="mb-2">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="flex-1">
-                            <label class="text-sm text-gray-600 dark:text-gray-400 mb-1 block">Números</label>
-                            <div id="numbers-container" class="grid grid-cols-7 gap-2 w-full">
-                                <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
-                                <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
-                                <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
-                                <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
-                                <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
-                                <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
-                                <div class="number-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
-                            </div>
-                        </div>
-                        <div class="w-20">
-                            <label class="text-sm text-gray-600 dark:text-gray-400 mb-1 block">Mês</label>
-                            <div id="month-box" class="month-box bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center h-12 text-lg font-bold text-gray-800 dark:text-white">-</div>
-                        </div>
-                    </div>
-                    <div id="match-info" class="mt-2 text-sm text-gray-600 dark:text-gray-400 text-center hidden">
-                        Acertos: <span id="match-counter" class="text-green-600 dark:text-green-400">0</span>/7 + Mês: <span id="month-match" class="text-green-600 dark:text-green-400">não</span>
-                    </div>
-                </div>
-                
-                <div class="mb-6">
-                    <h3 class="text-md font-medium text-gray-700 dark:text-gray-300 mb-3">Digite seus palpites:</h3>
-                    
-                    <!-- Navegação pelos conjuntos de palpites -->
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <span class="text-sm text-gray-600 dark:text-gray-400">Mostrando palpites </span>
-                            <span id="conjunto-atual" class="font-bold">1-5</span>
-                            <span class="text-sm text-gray-600 dark:text-gray-400"> de 31</span>
-                        </div>
-                        <div class="flex space-x-2">
-                            <button id="prev-conjunto" class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50" disabled>
-                                ← Anterior
-                            </button>
-                            <button id="next-conjunto" class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600">
-                                Próximo →
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Container com grupos fixos de palpites -->
-                    <!-- Grupo 1 (visível inicialmente) -->
-                    <div id="grupo-palpites-1" class="palpites-grupo">
-                        <!-- Palpite 1 -->
-                        <div class="palpite-group mb-4 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center justify-between mb-2">
-                                <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Palpite 1</h4>
-                                <span class="text-xs text-gray-500 dark:text-gray-400 palpite-status"></span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="flex-1">
-                                    <div class="manual-input-container grid grid-cols-7 gap-2 w-full" data-palpite-id="1">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="1">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="2">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="3">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="4">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="5">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="6">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="7">
-                                    </div>
-                                </div>
-                                <div class="w-16">
-                                    <input type="number" min="1" max="12" class="month-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white w-full" placeholder="Mês">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Palpite 2 -->
-                        <div class="palpite-group mb-4 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center justify-between mb-2">
-                                <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Palpite 2</h4>
-                                <span class="text-xs text-gray-500 dark:text-gray-400 palpite-status"></span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="flex-1">
-                                    <div class="manual-input-container grid grid-cols-7 gap-2 w-full" data-palpite-id="2">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="1">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="2">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="3">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="4">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="5">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="6">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="7">
-                                    </div>
-                                </div>
-                                <div class="w-16">
-                                    <input type="number" min="1" max="12" class="month-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white w-full" placeholder="Mês">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Palpite 3 -->
-                        <div class="palpite-group mb-4 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center justify-between mb-2">
-                                <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Palpite 3</h4>
-                                <span class="text-xs text-gray-500 dark:text-gray-400 palpite-status"></span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="flex-1">
-                                    <div class="manual-input-container grid grid-cols-7 gap-2 w-full" data-palpite-id="3">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="1">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="2">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="3">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="4">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="5">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="6">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="7">
-                                    </div>
-                                </div>
-                                <div class="w-16">
-                                    <input type="number" min="1" max="12" class="month-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white w-full" placeholder="Mês">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Palpite 4 -->
-                        <div class="palpite-group mb-4 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center justify-between mb-2">
-                                <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Palpite 4</h4>
-                                <span class="text-xs text-gray-500 dark:text-gray-400 palpite-status"></span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="flex-1">
-                                    <div class="manual-input-container grid grid-cols-7 gap-2 w-full" data-palpite-id="4">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="1">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="2">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="3">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="4">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="5">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="6">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="7">
-                                    </div>
-                                </div>
-                                <div class="w-16">
-                                    <input type="number" min="1" max="12" class="month-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white w-full" placeholder="Mês">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Palpite 5 -->
-                        <div class="palpite-group mb-4 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center justify-between mb-2">
-                                <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Palpite 5</h4>
-                                <span class="text-xs text-gray-500 dark:text-gray-400 palpite-status"></span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="flex-1">
-                                    <div class="manual-input-container grid grid-cols-7 gap-2 w-full" data-palpite-id="5">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="1">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="2">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="3">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="4">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="5">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="6">
-                                        <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="7">
-                                    </div>
-                                </div>
-                                <div class="w-16">
-                                    <input type="number" min="1" max="12" class="month-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white w-full" placeholder="Mês">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Grupo 2 (escondido inicialmente) -->
-                    <div id="grupo-palpites-2" class="palpites-grupo hidden">
-                        <!-- Outros palpites (6-10) -->
-                    </div>
-                    
-                    <!-- Outros grupos 3-7 com palpites 11-31 serão gerados via JavaScript -->
-                    <div id="palpites-container">
-                        <!-- Aqui serão adicionados dinamicamente os outros palpites -->
-                    </div>
-                    
-                    <div class="mt-3">
-                        <div id="error-message" class="text-red-500 text-sm mb-2 hidden"></div>
-                        
-                        <!-- Botões para conferência sequencial e em massa -->
-                        <div class="flex flex-col gap-2">
-                            <button id="check-next-btn" class="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-md transition-colors duration-200 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                Conferir Próximo Palpite
-                            </button>
-                            
-                            <button id="check-all-btn" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors duration-200 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                </svg>
-                                Conferir Todos os Palpites
-                            </button>
-                            
-                            <button id="reset-check-btn" class="w-full py-2 px-4 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-md transition-colors duration-200 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                                </svg>
-                                Reiniciar Conferência
-                            </button>
-                        </div>
-                        
-                        <!-- Resultado da conferência -->
-                        <div id="conferencia-resultado" class="mt-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-md hidden">
-                            <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Resultado da conferência:</h4>
-                            <div id="conferencia-msg" class="text-sm font-bold text-center py-2"></div>
-                        </div>
-                        
-                        <!-- Resumo de acertos -->
-                        <div id="resumo-acertos" class="mt-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-md hidden">
-                            <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Resumo da conferência:</h4>
-                            <div class="grid grid-cols-3 gap-2 text-sm">
-                                <div class="bg-gray-100 dark:bg-gray-600 p-2 rounded">
-                                    <div class="text-xs text-gray-500 dark:text-gray-400">Palpite atual</div>
-                                    <div id="palpite-atual" class="font-bold text-gray-800 dark:text-white">0</div>
-                                </div>
-                                <div class="bg-gray-100 dark:bg-gray-600 p-2 rounded">
-                                    <div class="text-xs text-gray-500 dark:text-gray-400">Acertos</div>
-                                    <div id="atual-acertos" class="font-bold text-green-600 dark:text-green-400">0</div>
-                                </div>
-                                <div class="bg-gray-100 dark:bg-gray-600 p-2 rounded">
-                                    <div class="text-xs text-gray-500 dark:text-gray-400">Mês</div>
-                                    <div id="atual-mes" class="font-bold text-blue-600 dark:text-blue-400">Não</div>
-                                </div>
-                            </div>
-                            <div id="palpite-vencedor" class="mt-3 py-2 px-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900 rounded-md hidden">
-                                <div class="text-center font-medium text-green-700 dark:text-green-400">PALPITE VENCEDOR!</div>
-                                <div class="text-sm text-center text-green-600 dark:text-green-300 mt-1">
-                                    Encontrou <span id="vencedor-acertos" class="font-bold">5</span> acertos!
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mb-4">
-                    <label for="interval-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Intervalo de geração automática:</label>
-                    <div class="flex gap-2">
-                        <select id="interval-select" class="flex-1 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
-                            <option value="0">Desativado</option>
-                            <option value="1">1 segundo</option>
-                            <option value="2">2 segundos</option>
-                            <option value="5">5 segundos</option>
-                            <option value="10">10 segundos</option>
-                            <option value="30">30 segundos</option>
-                            <option value="60">1 minuto</option>
-                        </select>
-                        <button id="toggle-auto-btn" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white py-2 px-4 rounded-md transition-colors duration-200 hidden">
-                            Parar
+                    <div class="flex space-x-2">
+                        <button id="prev-conjunto" class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50" disabled>
+                            ← Anterior
+                        </button>
+                        <button id="next-conjunto" class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600">
+                            Próximo →
                         </button>
                     </div>
-                    <div id="countdown-display" class="mt-2 text-sm text-gray-600 dark:text-gray-400 hidden">
-                        Próximo palpite em: <span id="countdown">0</span>s
+                </div>
+                
+                <!-- Container com grupos fixos de palpites -->
+                <!-- Grupo 1 (visível inicialmente) -->
+                <div id="grupo-palpites-1" class="palpites-grupo">
+                    <!-- Palpite 1 -->
+                    <div class="palpite-group mb-4 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Palpite 1</h4>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 palpite-status"></span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1">
+                                <div class="manual-input-container grid grid-cols-7 gap-2 w-full" data-palpite-id="1">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="1">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="2">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="3">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="4">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="5">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="6">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="7">
+                                </div>
+                            </div>
+                            <div class="w-16">
+                                <input type="number" min="1" max="12" class="month-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white w-full" placeholder="Mês">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Palpite 2 -->
+                    <div class="palpite-group mb-4 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Palpite 2</h4>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 palpite-status"></span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1">
+                                <div class="manual-input-container grid grid-cols-7 gap-2 w-full" data-palpite-id="2">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="1">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="2">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="3">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="4">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="5">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="6">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="7">
+                                </div>
+                            </div>
+                            <div class="w-16">
+                                <input type="number" min="1" max="12" class="month-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white w-full" placeholder="Mês">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Palpite 3 -->
+                    <div class="palpite-group mb-4 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Palpite 3</h4>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 palpite-status"></span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1">
+                                <div class="manual-input-container grid grid-cols-7 gap-2 w-full" data-palpite-id="3">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="1">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="2">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="3">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="4">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="5">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="6">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="7">
+                                </div>
+                            </div>
+                            <div class="w-16">
+                                <input type="number" min="1" max="12" class="month-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white w-full" placeholder="Mês">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Palpite 4 -->
+                    <div class="palpite-group mb-4 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Palpite 4</h4>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 palpite-status"></span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1">
+                                <div class="manual-input-container grid grid-cols-7 gap-2 w-full" data-palpite-id="4">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="1">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="2">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="3">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="4">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="5">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="6">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="7">
+                                </div>
+                            </div>
+                            <div class="w-16">
+                                <input type="number" min="1" max="12" class="month-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white w-full" placeholder="Mês">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Palpite 5 -->
+                    <div class="palpite-group mb-4 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Palpite 5</h4>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 palpite-status"></span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1">
+                                <div class="manual-input-container grid grid-cols-7 gap-2 w-full" data-palpite-id="5">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="1">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="2">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="3">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="4">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="5">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="6">
+                                    <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white" placeholder="7">
+                                </div>
+                            </div>
+                            <div class="w-16">
+                                <input type="number" min="1" max="12" class="month-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-10 text-sm font-medium text-gray-800 dark:text-white w-full" placeholder="Mês">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <button id="generate-btn" class="w-full py-3 px-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-md transition-colors duration-200 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                    </svg>
-                    Gerar Palpite
-                </button>
+                <!-- Grupo 2 (escondido inicialmente) -->
+                <div id="grupo-palpites-2" class="palpites-grupo hidden">
+                    <!-- Outros palpites (6-10) -->
+                </div>
+                
+                <!-- Outros grupos 3-7 com palpites 11-31 serão gerados via JavaScript -->
+                <div id="palpites-container">
+                    <!-- Aqui serão adicionados dinamicamente os outros palpites -->
+                </div>
+                
+                <div class="mt-3">
+                    <div id="error-message" class="text-red-500 text-sm mb-2 hidden"></div>
+                    
+                    <!-- Botões para conferência sequencial e em massa -->
+                    <div class="flex flex-col gap-2">
+                        <button id="check-next-btn" class="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-md transition-colors duration-200 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            Conferir Próximo Palpite
+                        </button>
+                        
+                        <button id="check-all-btn" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors duration-200 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Conferir Todos os Palpites
+                        </button>
+                        
+                        <button id="reset-check-btn" class="w-full py-2 px-4 bg-gray-500 hover:bg-gray-600 text-white font-medium rounded-md transition-colors duration-200 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                            </svg>
+                            Reiniciar Conferência
+                        </button>
+                    </div>
+                    
+                    <!-- Resultado da conferência -->
+                    <div id="conferencia-resultado" class="mt-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-md hidden">
+                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Resultado da conferência:</h4>
+                        <div id="conferencia-msg" class="text-sm font-bold text-center py-2"></div>
+                    </div>
+                    
+                    <!-- Resumo de acertos -->
+                    <div id="resumo-acertos" class="mt-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-md hidden">
+                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Resumo da conferência:</h4>
+                        <div class="grid grid-cols-3 gap-2 text-sm">
+                            <div class="bg-gray-100 dark:bg-gray-600 p-2 rounded">
+                                <div class="text-xs text-gray-500 dark:text-gray-400">Palpite atual</div>
+                                <div id="palpite-atual" class="font-bold text-gray-800 dark:text-white">0</div>
+                            </div>
+                            <div class="bg-gray-100 dark:bg-gray-600 p-2 rounded">
+                                <div class="text-xs text-gray-500 dark:text-gray-400">Acertos</div>
+                                <div id="atual-acertos" class="font-bold text-green-600 dark:text-green-400">0</div>
+                            </div>
+                            <div class="bg-gray-100 dark:bg-gray-600 p-2 rounded">
+                                <div class="text-xs text-gray-500 dark:text-gray-400">Mês</div>
+                                <div id="atual-mes" class="font-bold text-blue-600 dark:text-blue-400">Não</div>
+                            </div>
+                        </div>
+                        <div id="palpite-vencedor" class="mt-3 py-2 px-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900 rounded-md hidden">
+                            <div class="text-center font-medium text-green-700 dark:text-green-400">PALPITE VENCEDOR!</div>
+                            <div class="text-sm text-center text-green-600 dark:text-green-300 mt-1">
+                                Encontrou <span id="vencedor-acertos" class="font-bold">5</span> acertos!
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Como funciona</h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-2">Clique no botão "Gerar Palpite" para obter 7 números aleatórios entre 1 e 31, sem repetições.</p>
-                <p class="text-gray-600 dark:text-gray-300 mb-2">Para conferir seus palpites, preencha os campos e escolha entre:
-                <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 mb-2">
-                    <li><b>Conferir Próximo Palpite</b>: Verifica um palpite por vez, parando quando encontrar um vencedor (5+ acertos)</li>
-                    <li><b>Conferir Todos</b>: Verifica todos os seus palpites de uma vez</li>
-                </ul>
-                <p class="text-gray-600 dark:text-gray-300 mb-2">Para geração automática, selecione um intervalo de tempo no menu suspenso. Quando ativo, um contador mostrará o tempo restante para o próximo palpite.</p>
-                <p class="text-gray-600 dark:text-gray-300 text-sm">Os números gerados são apenas sugestões e não garantem resultados em qualquer sorteio.</p>
+            <div class="mb-4">
+                <label for="interval-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Intervalo de geração automática:</label>
+                <div class="flex gap-2">
+                    <select id="interval-select" class="flex-1 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+                        <option value="0">Desativado</option>
+                        <option value="1">1 segundo</option>
+                        <option value="2">2 segundos</option>
+                        <option value="5">5 segundos</option>
+                        <option value="10">10 segundos</option>
+                        <option value="30">30 segundos</option>
+                        <option value="60">1 minuto</option>
+                    </select>
+                    <button id="toggle-auto-btn" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white py-2 px-4 rounded-md transition-colors duration-200 hidden">
+                        Parar
+                    </button>
+                </div>
+                <div id="countdown-display" class="mt-2 text-sm text-gray-600 dark:text-gray-400 hidden">
+                    Próximo palpite em: <span id="countdown">0</span>s
+                </div>
+            </div>
+            
+            <button id="generate-btn" class="w-full py-3 px-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-md transition-colors duration-200 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                </svg>
+                Gerar Palpite
+            </button>
+        </div>
+        
+        <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Como funciona</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-2">Clique no botão "Gerar Palpite" para obter 7 números aleatórios entre 1 e 31, sem repetições.</p>
+            <p class="text-gray-600 dark:text-gray-300 mb-2">Para conferir seus palpites, preencha os campos e escolha entre:
+            <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300 mb-2">
+                <li><b>Conferir Próximo Palpite</b>: Verifica um palpite por vez, parando quando encontrar um vencedor (5+ acertos)</li>
+                <li><b>Conferir Todos</b>: Verifica todos os seus palpites de uma vez</li>
+            </ul>
+            <p class="text-gray-600 dark:text-gray-300 mb-2">Para geração automática, selecione um intervalo de tempo no menu suspenso. Quando ativo, um contador mostrará o tempo restante para o próximo palpite.</p>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">Os números gerados são apenas sugestões e não garantem resultados em qualquer sorteio.</p>
+            
+            <div id="history-section" class="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
+                <div class="flex justify-between items-center mb-3">
+                    <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Histórico de grandes acertos (5+)</h4>
+                    <button id="show-freq-btn" class="text-xs px-2 py-1 bg-primary text-white rounded hover:bg-primary/90 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5z" />
+                            <path d="M8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7z" />
+                            <path d="M14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                        </svg>
+                        Frequência
+                    </button>
+                </div>
                 
-                <div id="history-section" class="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
-                    <div class="flex justify-between items-center mb-3">
-                        <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Histórico de grandes acertos (5+)</h4>
-                        <button id="show-freq-btn" class="text-xs px-2 py-1 bg-primary text-white rounded hover:bg-primary/90 flex items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5z" />
-                                <path d="M8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7z" />
-                                <path d="M14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
-                            </svg>
-                            Frequência
-                        </button>
-                    </div>
-                    
-                    <!-- Frequência de acertos -->
-                    <div id="frequency-stats" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-md hidden">
-                        <h5 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Frequência de acertos:</h5>
-                        <div id="frequency-content"></div>
-                    </div>
-                    
-                    <!-- Histórico de grandes acertos -->
-                    <div id="history-container" class="text-sm">
-                        <!-- Aqui serão adicionados os grandes acertos -->
-                        <div class="text-center text-gray-500 dark:text-gray-400 italic py-2">
-                            Os acertos com 5+ números aparecerão aqui.
-                        </div>
+                <!-- Frequência de acertos -->
+                <div id="frequency-stats" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-md hidden">
+                    <h5 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Frequência de acertos:</h5>
+                    <div id="frequency-content"></div>
+                </div>
+                
+                <!-- Histórico de grandes acertos -->
+                <div id="history-container" class="text-sm">
+                    <!-- Aqui serão adicionados os grandes acertos -->
+                    <div class="text-center text-gray-500 dark:text-gray-400 italic py-2">
+                        Os acertos com 5+ números aparecerão aqui.
                     </div>
                 </div>
             </div>
@@ -415,9 +334,6 @@
     </div>
 
     <script>
-        // Sistema de autenticação
-        let currentUser = null;
-        
         // Detectar modo escuro
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.documentElement.classList.add('dark');
@@ -452,272 +368,27 @@
         let numerosSorteadosHistorico = [];
         let sessionID = new Date().getTime().toString(); // ID único para a sessão atual
         
-        // Funções do sistema de login
-        function getUserStorageKey(key) {
-            return `${currentUser}_${key}`;
-        }
-        
-        function saveToUserStorage(key, data) {
-            if (!currentUser) return null;
-            try {
-                localStorage.setItem(getUserStorageKey(key), JSON.stringify(data));
-                return true;
-            } catch (e) {
-                console.error("Erro ao salvar dados do usuário:", e);
-                return false;
-            }
-        }
-        
-        function loadFromUserStorage(key) {
-            if (!currentUser) return null;
-            try {
-                const data = localStorage.getItem(getUserStorageKey(key));
-                return data ? JSON.parse(data) : null;
-            } catch (e) {
-                console.error("Erro ao carregar dados do usuário:", e);
-                return null;
-            }
-        }
-        
-        // Função para verificar se usuário existe
-        function userExists(username) {
-            return localStorage.getItem(`user_${username}`) !== null;
-        }
-        
-        // Função para criar novo usuário
-        function createUser(username, password) {
-            if (userExists(username)) {
-                return false;
-            }
-            
-            const userData = {
-                username: username,
-                password: password,
-                createdAt: new Date().toISOString()
-            };
-            
-            localStorage.setItem(`user_${username}`, JSON.stringify(userData));
-            return true;
-        }
-        
-        // Função para autenticar usuário
-        function login(username, password) {
-            if (!userExists(username)) {
-                return false;
-            }
-            
-            const userData = JSON.parse(localStorage.getItem(`user_${username}`));
-            if (userData.password !== password) {
-                return false;
-            }
-            
-            currentUser = username;
-            return true;
-        }
-        
-        // Função para logout
-        function logout() {
-            currentUser = null;
-            showLoginScreen();
-        }
-        
-        // Funções de interface para telas de login/registro
-        function showLoginScreen() {
-            document.getElementById('login-screen').classList.remove('hidden');
-            document.getElementById('register-screen').classList.add('hidden');
-            document.getElementById('user-bar').classList.add('hidden');
-            document.getElementById('app-container').classList.add('hidden');
-            document.getElementById('login-error').classList.add('hidden');
-        }
-        
-        function showRegisterScreen() {
-            document.getElementById('login-screen').classList.add('hidden');
-            document.getElementById('register-screen').classList.remove('hidden');
-            document.getElementById('user-bar').classList.add('hidden');
-            document.getElementById('app-container').classList.add('hidden');
-            document.getElementById('register-error').classList.add('hidden');
-        }
-        
-        function showAppScreen() {
-            document.getElementById('login-screen').classList.add('hidden');
-            document.getElementById('register-screen').classList.add('hidden');
-            document.getElementById('user-bar').classList.remove('hidden');
-            document.getElementById('app-container').classList.remove('hidden');
-            
-            // Configurar a barra de usuário
-            document.getElementById('user-display-name').textContent = currentUser;
-            document.getElementById('user-initial').textContent = currentUser.charAt(0).toUpperCase();
-            
-            // Carregar dados do usuário
-            loadUserData();
-        }
-        
-        // Função para carregar dados do usuário atual
-        function loadUserData() {
+        // Carregar histórico anterior se existir
+        try {
             // Carregar histórico de sorteios
-            const historicoSalvo = loadFromUserStorage('diaDaSorteNumeros');
+            const historicoSalvo = localStorage.getItem('diaDaSorteNumeros');
             if (historicoSalvo) {
-                numerosSorteadosHistorico = historicoSalvo;
+                numerosSorteadosHistorico = JSON.parse(historicoSalvo);
                 console.log(`Histórico de sorteios carregado: ${numerosSorteadosHistorico.length} registros`);
-            } else {
-                numerosSorteadosHistorico = [];
             }
             
             // Carregar histórico de acertos (5+)
-            const acertosSalvos = loadFromUserStorage('diaDaSorteAcertos');
+            const acertosSalvos = localStorage.getItem('diaDaSorteAcertos');
             if (acertosSalvos) {
-                detailedHistoryData = acertosSalvos;
+                detailedHistoryData = JSON.parse(acertosSalvos);
                 console.log(`Histórico de acertos carregado: ${detailedHistoryData.length} registros`);
-                
-                // Mostrar histórico de grandes acertos
-                displayHistory();
-            } else {
-                detailedHistoryData = [];
+                // Não mostramos mais o histórico visualmente, apenas registramos em segundo plano
             }
-            
-            // Carregar frequências de números
-            const freqNumerosSalvos = loadFromUserStorage('diaDaSorteFreqNumeros');
-            if (freqNumerosSalvos) {
-                registroNumerosAcertados = freqNumerosSalvos;
-            } else {
-                registroNumerosAcertados = {};
-            }
-            
-            // Carregar frequências de meses
-            const freqMesesSalvos = loadFromUserStorage('diaDaSorteFreqMeses');
-            if (freqMesesSalvos) {
-                registroMesesAcertados = freqMesesSalvos;
-            } else {
-                registroMesesAcertados = {};
-            }
+        } catch (e) {
+            console.log("Não foi possível carregar o histórico:", e);
+            numerosSorteadosHistorico = [];
+            detailedHistoryData = [];
         }
-        
-        // Função para exibir histórico de grandes acertos
-        function displayHistory() {
-            const grandes = detailedHistoryData.filter(h => h.matchCount >= 5);
-            
-            if (grandes.length > 0) {
-                // Exibir os últimos 8 grandes acertos
-                const ultimos = grandes.slice(-8);
-                const historyContainer = document.getElementById('history-container');
-                
-                // Limpar o container
-                historyContainer.innerHTML = '';
-                
-                // Adicionar os acertos em ordem reversa (mais recentes primeiro)
-                ultimos.reverse().forEach(acerto => {
-                    const historyItem = document.createElement('div');
-                    historyItem.className = 'history-item bg-gray-50 dark:bg-gray-800 p-2 rounded mb-2';
-                    
-                    const sortedMatches = [...acerto.matchedNumbers].sort((a, b) => a - b);
-                    const monthName = monthNames[acerto.actualMonth - 1];
-                    
-                    historyItem.innerHTML = `
-                        <div class="text-xs text-gray-500 dark:text-gray-400">${acerto.datetime}</div>
-                        <div class="mt-1">
-                            <span class="font-medium">${acerto.matchCount} acertos:</span> 
-                            <span class="history-numbers text-red-600 dark:text-red-400">${sortedMatches.join(', ')}</span>
-                        </div>
-                        <div class="text-xs">
-                            Mês: <span class="${acerto.monthMatch ? 'text-green-600 dark:text-green-400 font-medium' : ''}">${monthName} (${acerto.actualMonth})</span>
-                            ${acerto.monthMatch ? ' ✓' : ''}
-                        </div>
-                    `;
-                    
-                    historyContainer.appendChild(historyItem);
-                });
-            } else {
-                // Exibir mensagem padrão
-                document.getElementById('history-container').innerHTML = `
-                    <div class="text-center text-gray-500 dark:text-gray-400 italic py-2">
-                        Os acertos com 5+ números aparecerão aqui.
-                    </div>
-                `;
-            }
-        }
-        
-        // Eventos para formulários de login e registro
-        document.addEventListener('DOMContentLoaded', function() {
-            // Verificar se já há um usuário logado no localStorage
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                const userData = JSON.parse(savedUser);
-                if (login(userData.username, userData.password)) {
-                    showAppScreen();
-                } else {
-                    showLoginScreen();
-                }
-            } else {
-                showLoginScreen();
-            }
-            
-            // Formulário de login
-            document.getElementById('login-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                
-                if (login(username, password)) {
-                    // Salvar usuário atual no localStorage para "lembrar" login
-                    localStorage.setItem('currentUser', JSON.stringify({
-                        username: username,
-                        password: password
-                    }));
-                    
-                    showAppScreen();
-                } else {
-                    document.getElementById('login-error').classList.remove('hidden');
-                }
-            });
-            
-            // Botão para abrir tela de registro
-            document.getElementById('register-btn').addEventListener('click', function() {
-                showRegisterScreen();
-            });
-            
-            // Formulário de registro
-            document.getElementById('register-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const username = document.getElementById('new-username').value;
-                const password = document.getElementById('new-password').value;
-                const confirmPassword = document.getElementById('confirm-password').value;
-                
-                if (password !== confirmPassword) {
-                    alert('As senhas não coincidem.');
-                    return;
-                }
-                
-                if (createUser(username, password)) {
-                    // Fazer login automaticamente após registro
-                    login(username, password);
-                    
-                    // Salvar usuário atual no localStorage para "lembrar" login
-                    localStorage.setItem('currentUser', JSON.stringify({
-                        username: username,
-                        password: password
-                    }));
-                    
-                    showAppScreen();
-                } else {
-                    document.getElementById('register-error').classList.remove('hidden');
-                }
-            });
-            
-            // Botão para voltar à tela de login
-            document.getElementById('back-to-login-btn').addEventListener('click', function() {
-                showLoginScreen();
-            });
-            
-            // Botão de logout
-            document.getElementById('logout-btn').addEventListener('click', function() {
-                // Remover usuário atual do localStorage
-                localStorage.removeItem('currentUser');
-                logout();
-            });
-        });
-        
         const monthNames = [
             "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
             "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
@@ -773,9 +444,13 @@
                 numerosSorteadosHistorico = numerosSorteadosHistorico.slice(-1000);
             }
             
-            // Salvar no localStorage do usuário
-            saveToUserStorage('diaDaSorteNumeros', numerosSorteadosHistorico);
-            console.log("Números registrados no histórico:", numeros);
+            // Salvar no localStorage
+            try {
+                localStorage.setItem('diaDaSorteNumeros', JSON.stringify(numerosSorteadosHistorico));
+                console.log("Números registrados no histórico:", numeros);
+            } catch (e) {
+                console.error("Erro ao salvar histórico:", e);
+            }
             
             return registro;
         }
@@ -963,14 +638,18 @@
                 detailedHistoryData = detailedHistoryData.slice(-100);
             }
             
-            // Salvar no localStorage do usuário
-            saveToUserStorage('diaDaSorteAcertos', detailedHistoryData);
-            console.log("Acertos salvos no registro:", JSON.stringify(detailedRecord, null, 2));
+            // Salvar o histórico de acertos no localStorage para persistência
+            try {
+                localStorage.setItem('diaDaSorteAcertos', JSON.stringify(detailedHistoryData));
+                console.log("Acertos salvos no registro:", JSON.stringify(detailedRecord, null, 2));
+            } catch (e) {
+                console.log("Não foi possível salvar os acertos localmente:", e);
+            }
             
             return detailedRecord;
         }
         
-        // Função para adicionar ao histórico de acertos
+        // Função para adicionar ao histórico de acertos - agora também exibe visualmente no histórico
         function addToHistory(palpiteId, matchCount, matchedNumbers, generatedNumbers, month, monthMatch, userNumbers, userMonth) {
             // Registrar no histórico detalhado
             const recordId = registerDetailedMatch(
@@ -1479,9 +1158,13 @@
                 }
             }
             
-            // Salvar no localStorage do usuário
-            saveToUserStorage('diaDaSorteFreqNumeros', registroNumerosAcertados);
-            saveToUserStorage('diaDaSorteFreqMeses', registroMesesAcertados);
+            // Salvar no localStorage para persistência
+            try {
+                localStorage.setItem('diaDaSorteFreqNumeros', JSON.stringify(registroNumerosAcertados));
+                localStorage.setItem('diaDaSorteFreqMeses', JSON.stringify(registroMesesAcertados));
+            } catch (e) {
+                console.log("Não foi possível salvar as frequências:", e);
+            }
             
             // Retornar as estatísticas atualizadas
             return {
@@ -1557,7 +1240,67 @@
                     }
                 });
             }
+            
+            // Carregar histórico de acertos visualmente se existir
+            const acertosSalvos = localStorage.getItem('diaDaSorteAcertos');
+            if (acertosSalvos) {
+                const historicos = JSON.parse(acertosSalvos);
+                const grandes = historicos.filter(h => h.matchCount >= 5);
+                
+                if (grandes.length > 0) {
+                    // Exibir os últimos 8 grandes acertos
+                    const ultimos = grandes.slice(-8);
+                    const historyContainer = document.getElementById('history-container');
+                    
+                    // Remover a mensagem padrão
+                    const defaultMsg = historyContainer.querySelector('.text-center.italic');
+                    if (defaultMsg) {
+                        historyContainer.removeChild(defaultMsg);
+                    }
+                    
+                    // Adicionar os acertos em ordem reversa (mais recentes primeiro)
+                    ultimos.reverse().forEach(acerto => {
+                        const historyItem = document.createElement('div');
+                        historyItem.className = 'history-item bg-gray-50 dark:bg-gray-800 p-2 rounded mb-2';
+                        
+                        const sortedMatches = [...acerto.matchedNumbers].sort((a, b) => a - b);
+                        const monthName = monthNames[acerto.actualMonth - 1];
+                        
+                        historyItem.innerHTML = `
+                            <div class="text-xs text-gray-500 dark:text-gray-400">${acerto.datetime}</div>
+                            <div class="mt-1">
+                                <span class="font-medium">${acerto.matchCount} acertos:</span> 
+                                <span class="history-numbers text-red-600 dark:text-red-400">${sortedMatches.join(', ')}</span>
+                            </div>
+                            <div class="text-xs">
+                                Mês: <span class="${acerto.monthMatch ? 'text-green-600 dark:text-green-400 font-medium' : ''}">${monthName} (${acerto.actualMonth})</span>
+                                ${acerto.monthMatch ? ' ✓' : ''}
+                            </div>
+                        `;
+                        
+                        historyContainer.appendChild(historyItem);
+                    });
+                }
+            }
         });
+        
+        // Carregar frequências salvas se existirem
+        try {
+            const freqNumerosSalvos = localStorage.getItem('diaDaSorteFreqNumeros');
+            const freqMesesSalvos = localStorage.getItem('diaDaSorteFreqMeses');
+            
+            if (freqNumerosSalvos) {
+                registroNumerosAcertados = JSON.parse(freqNumerosSalvos);
+            }
+            
+            if (freqMesesSalvos) {
+                registroMesesAcertados = JSON.parse(freqMesesSalvos);
+            }
+        } catch (e) {
+            console.log("Erro ao carregar frequências:", e);
+            registroNumerosAcertados = {};
+            registroMesesAcertados = {};
+        }
         
         // Função para verificar todos os palpites de uma vez
         function checkAllPalpites() {
@@ -1735,21 +1478,19 @@
         });
         
         // Adicionar validação de input para limitar a 1-31 e evitar repetições
-        document.addEventListener('DOMContentLoaded', function() {
-            const manualInputs = document.querySelectorAll('.manual-number-input');
+        const manualInputs = document.querySelectorAll('.manual-number-input');
+        
+        manualInputs.forEach(input => {
+            // Garantir que o valor esteja dentro do intervalo 1-31
+            input.addEventListener('blur', function() {
+                const value = parseInt(this.value);
+                if (value < 1) this.value = 1;
+                if (value > 31) this.value = 31;
+            });
             
-            manualInputs.forEach(input => {
-                // Garantir que o valor esteja dentro do intervalo 1-31
-                input.addEventListener('blur', function() {
-                    const value = parseInt(this.value);
-                    if (value < 1) this.value = 1;
-                    if (value > 31) this.value = 31;
-                });
-                
-                // Destacar campo quando selecionado
-                input.addEventListener('focus', function() {
-                    this.select();
-                });
+            // Destacar campo quando selecionado
+            input.addEventListener('focus', function() {
+                this.select();
             });
         });
     </script>
@@ -1854,8 +1595,6 @@
             
             // Função para criar todos os palpites dinamicamente
             function criarTodosOsPalpites() {
-                if (!palpitesContainer) return;
-                
                 todosPalpites = []; // Reiniciar o array
                 
                 // Primeiro, coletar os palpites fixos (1-5) que já existem
@@ -1866,15 +1605,13 @@
                 
                 // Preencher o grupo 2 (palpites 6-10)
                 const grupo2 = document.getElementById('grupo-palpites-2');
-                if (grupo2) {
-                    grupo2.innerHTML = ''; // Limpar o container
-                    
-                    // Criar palpites 6-10 no grupo2
-                    for (let i = 6; i <= 10; i++) {
-                        const novoPalpite = criarPalpite(i);
-                        grupo2.appendChild(novoPalpite);
-                        todosPalpites.push(novoPalpite);
-                    }
+                grupo2.innerHTML = ''; // Limpar o container
+                
+                // Criar palpites 6-10 no grupo2
+                for (let i = 6; i <= 10; i++) {
+                    const novoPalpite = criarPalpite(i);
+                    grupo2.appendChild(novoPalpite);
+                    todosPalpites.push(novoPalpite);
                 }
                 
                 // Limpar o container de palpites para os restantes (11-31)
@@ -1892,8 +1629,6 @@
             
             // Função para exibir apenas os palpites da página atual
             function mostrarPaginaAtual() {
-                if (!palpitesContainer) return;
-                
                 // Esconder todos os palpites nos containers dinâmicos
                 palpitesContainer.querySelectorAll('.palpite-group').forEach(palpite => {
                     palpite.style.display = 'none';
@@ -1945,34 +1680,28 @@
                 nextButton.disabled = fim >= 31;
             }
             
-            if (palpitesContainer) {
-                // Criar todos os palpites no carregamento
-                criarTodosOsPalpites();
-                
-                // Inicializar com a primeira página
-                mostrarPaginaAtual();
-                
-                // Configurar botões de navegação
-                if (prevButton) {
-                    prevButton.addEventListener('click', function() {
-                        if (paginaAtual > 1) {
-                            paginaAtual--;
-                            mostrarPaginaAtual();
-                        }
-                    });
+            // Criar todos os palpites no carregamento
+            criarTodosOsPalpites();
+            
+            // Inicializar com a primeira página
+            mostrarPaginaAtual();
+            
+            // Configurar botões de navegação
+            prevButton.addEventListener('click', function() {
+                if (paginaAtual > 1) {
+                    paginaAtual--;
+                    mostrarPaginaAtual();
                 }
-                
-                if (nextButton) {
-                    nextButton.addEventListener('click', function() {
-                        const maxPage = Math.ceil(31 / palpitesPorPagina);
-                        if (paginaAtual < maxPage) {
-                            paginaAtual++;
-                            mostrarPaginaAtual();
-                            console.log(`Avançou para página ${paginaAtual} de ${maxPage}`);
-                        }
-                    });
+            });
+            
+            nextButton.addEventListener('click', function() {
+                const maxPage = Math.ceil(31 / palpitesPorPagina);
+                if (paginaAtual < maxPage) {
+                    paginaAtual++;
+                    mostrarPaginaAtual();
+                    console.log(`Avançou para página ${paginaAtual} de ${maxPage}`);
                 }
-            }
+            });
         });
     </script>
 </body>
