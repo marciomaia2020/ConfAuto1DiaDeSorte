@@ -23,10 +23,11 @@
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold text-center text-gray-800 dark:text-white mb-8">Dia da Sorte - 1 palpite manual</h1>
 		<hr />
-		<p><a href="index-4fixo3automatico.html">4 fixos e 3 manual</a></p>
-        
-        <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Gerador de Palpites</h2>
+		<p><a href="index.html">Voltar</a></p>
+		
+		
+         <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-4">Dia da Sorte</h2>
             
             <!-- Botão de teste de áudio -->
             <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg mb-4">
@@ -72,15 +73,15 @@
                 <h3 class="text-md font-medium text-gray-700 dark:text-gray-300 mb-3">Digite seu próprio palpite:</h3>
                 <div class="flex items-center gap-3 mb-3">
                     <div class="flex-1">
-                        <label class="text-sm text-gray-600 dark:text-gray-400 mb-1 block">Números</label>
+                        <label class="text-sm text-gray-600 dark:text-gray-400 mb-1 block">Números (4 fixos + 3 aleatórios)</label>
                         <div id="manual-input-container" class="grid grid-cols-7 gap-2 w-full">
                             <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-12 text-base font-bold text-gray-800 dark:text-white" placeholder="1">
                             <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-12 text-base font-bold text-gray-800 dark:text-white" placeholder="2">
                             <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-12 text-base font-bold text-gray-800 dark:text-white" placeholder="3">
                             <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-12 text-base font-bold text-gray-800 dark:text-white" placeholder="4">
-                            <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-12 text-base font-bold text-gray-800 dark:text-white" placeholder="5">
-                            <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-12 text-base font-bold text-gray-800 dark:text-white" placeholder="6">
-                            <input type="number" min="1" max="31" class="manual-number-input bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-center h-12 text-base font-bold text-gray-800 dark:text-white" placeholder="7">
+                            <div class="auto-number-box bg-gray-200 dark:bg-gray-600 border border-gray-300 dark:border-gray-700 rounded-md flex items-center justify-center h-12 text-base font-bold text-gray-600 dark:text-gray-300">Auto</div>
+                            <div class="auto-number-box bg-gray-200 dark:bg-gray-600 border border-gray-300 dark:border-gray-700 rounded-md flex items-center justify-center h-12 text-base font-bold text-gray-600 dark:text-gray-300">Auto</div>
+                            <div class="auto-number-box bg-gray-200 dark:bg-gray-600 border border-gray-300 dark:border-gray-700 rounded-md flex items-center justify-center h-12 text-base font-bold text-gray-600 dark:text-gray-300">Auto</div>
                         </div>
                     </div>
                     <div class="w-16">
@@ -131,7 +132,7 @@
         <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
             <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">Como funciona</h3>
             <p class="text-gray-600 dark:text-gray-300 mb-2">Clique no botão "Gerar Palpite" para obter 7 números aleatórios entre 1 e 31, sem repetições.</p>
-            <p class="text-gray-600 dark:text-gray-300 mb-2">Você também pode digitar seus próprios números nos campos de entrada e clicar em "Aplicar Palpite". Os números devem estar entre 1 e 31 e não podem se repetir.</p>
+            <p class="text-gray-600 dark:text-gray-300 mb-2">Você também pode digitar 4 números fixos nos campos de entrada. Os outros 3 serão gerados aleatoriamente ao clicar em "Aplicar Palpite".</p>
             <p class="text-gray-600 dark:text-gray-300 mb-2">Para geração automática, selecione um intervalo de tempo no menu suspenso. Quando ativo, um contador mostrará o tempo restante para o próximo palpite.</p>
             <p class="text-gray-600 dark:text-gray-300 text-sm">Os números gerados são apenas sugestões e não garantem resultados em qualquer sorteio.</p>
             
@@ -929,6 +930,31 @@
         // Event listener para o botão de parar a geração automática
         document.getElementById('toggle-auto-btn').addEventListener('click', stopAutoGeneration);
         
+        // Função para gerar números aleatórios únicos
+        function generateUniqueRandomNumbers(min, max, count, excludeNumbers) {
+            // Conjunto para armazenar números já utilizados
+            const usedNumbers = new Set(excludeNumbers || []);
+            const result = [];
+            
+            // Verificar se é possível gerar a quantidade solicitada de números únicos
+            const availableNumbersCount = (max - min + 1) - usedNumbers.size;
+            if (count > availableNumbersCount) {
+                console.error(`Não é possível gerar ${count} números únicos entre ${min} e ${max} excluindo ${usedNumbers.size} números.`);
+                return result;
+            }
+            
+            // Gerar os números aleatórios
+            while (result.length < count) {
+                const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+                if (!usedNumbers.has(randomNum)) {
+                    usedNumbers.add(randomNum);
+                    result.push(randomNum);
+                }
+            }
+            
+            return result;
+        }
+        
         // Função para aplicar o palpite manual
         document.getElementById('apply-manual-btn').addEventListener('click', function() {
             // Inicializar áudio primeiro (para garantir que uma interação do usuário ocorreu)
@@ -940,21 +966,22 @@
             const monthBox = document.getElementById('month-box');
             const errorMessage = document.getElementById('error-message');
             
-            // Verificar se todos os campos estão preenchidos
-            let allFilled = true;
-            const numbers = [];
+            // Verificar se os 4 primeiros campos estão preenchidos
+            let allFixedNumbersFilled = true;
+            const fixedNumbers = [];
             
+            // Coletar números fixos dos inputs
             inputs.forEach(input => {
                 if (!input.value) {
-                    allFilled = false;
+                    allFixedNumbersFilled = false;
                 } else {
                     const num = parseInt(input.value);
-                    numbers.push(num);
+                    fixedNumbers.push(num);
                 }
             });
             
-            if (!allFilled) {
-                errorMessage.textContent = 'Por favor, preencha todos os 7 números.';
+            if (!allFixedNumbersFilled) {
+                errorMessage.textContent = 'Por favor, preencha todos os 4 números fixos.';
                 errorMessage.classList.remove('hidden');
                 return;
             }
@@ -974,27 +1001,44 @@
                 return;
             }
             
-            // Verificar se todos os números estão entre 1 e 31
-            const validRange = numbers.every(num => num >= 1 && num <= 31);
+            // Verificar se todos os números fixos estão entre 1 e 31
+            const validRange = fixedNumbers.every(num => num >= 1 && num <= 31);
             if (!validRange) {
                 errorMessage.textContent = 'Todos os números devem estar entre 1 e 31.';
                 errorMessage.classList.remove('hidden');
                 return;
             }
             
-            // Verificar se existem números repetidos
-            const uniqueNumbers = new Set(numbers);
-            if (uniqueNumbers.size !== 7) {
-                errorMessage.textContent = 'Não pode haver números repetidos no palpite.';
+            // Verificar se existem números repetidos nos números fixos
+            const uniqueFixedNumbers = new Set(fixedNumbers);
+            if (uniqueFixedNumbers.size !== fixedNumbers.length) {
+                errorMessage.textContent = 'Não pode haver números repetidos nos números fixos.';
                 errorMessage.classList.remove('hidden');
                 return;
             }
             
+            // Gerar os 3 números aleatórios complementares (sem repetir os números fixos)
+            const randomNumbers = generateUniqueRandomNumbers(1, 31, 3, fixedNumbers);
+            
+            // Combinar os números fixos com os aleatórios
+            const allNumbers = [...fixedNumbers, ...randomNumbers];
+            
             // Se passou por todas as validações, esconde a mensagem de erro
             errorMessage.classList.add('hidden');
             
+            // Atualizar os elementos visuais de "Auto" com os números gerados
+            const autoBoxes = document.querySelectorAll('.auto-number-box');
+            autoBoxes.forEach((box, index) => {
+                box.textContent = randomNumbers[index];
+                // Destacar os números aleatórios gerados
+                box.classList.add('bg-yellow-100', 'dark:bg-yellow-900', 'text-yellow-800', 'dark:text-yellow-200', 'pop-in');
+                setTimeout(() => {
+                    box.classList.remove('pop-in');
+                }, 300);
+            });
+            
             // Salvar o palpite do usuário
-            userGuessNumbers = [...numbers];
+            userGuessNumbers = [...allNumbers];
             userGuessMonth = monthValue;
             
             // Resetar o contador de acertos
